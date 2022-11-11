@@ -14,11 +14,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/profile', function () {
+    return view('profile');
+})->middleware(['auth', 'verified'])->name('profile');
+
+Route::post('profile', [App\Http\Controllers\ProfileController::class, 'profileUpdate'])->name('profileupdate');
 
 require __DIR__.'/auth.php';
